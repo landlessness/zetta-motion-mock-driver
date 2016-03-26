@@ -10,20 +10,20 @@ Motion.prototype.init = function(config) {
   config
     .name('Motion')
     .type('motion')
-    .state('deactivated')
-    .when('deactivated', {allow: ['activate']})
-    .when('activated', {allow: ['deactivate']})
-    .map('activate', this.activate)
-    .map('deactivate', this.deactivate);
+    .state('no-motion')
+    .when('motion', {allow: ['no-motion']})
+    .when('no-motion', {allow: ['motion']})
+    .map('motion', this.motion)
+    .map('no-motion', this.noMotion);
 
 };
 
-Motion.prototype.activate = function(cb) {
-  this.state = 'activated';
+Motion.prototype.motion = function(cb) {
+  this.state = 'motion';
   cb();
 }
 
-Motion.prototype.deactivate = function(cb) {
-  this.state = 'deactivated'
+Motion.prototype.noMotion = function(cb) {
+  this.state = 'no-motion'
   cb();
 }
